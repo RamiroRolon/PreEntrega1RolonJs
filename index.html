@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Prestamos</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Carrito de Compras - Suplementos Deportivos</title>
 </head>
 <body>
-    <h1>Simulador de Préstamos</h1>
-    <button onclick="calcularPrestamo()">Calcular</button>
-<script src="app.js"></script>   
+    <h1>Carrito de Compras - Suplementos Deportivos</h1>
+    
+    <button onclick="agregarProducto()">Agregar Producto</button>
+    
+    <div id="productos-list">
+        <!-- Aquí se mostrará la lista de productos -->
+    </div>
+    
+    <div id="carrito">
+        <h2>Carrito</h2>
+        <ul id="carrito-list">
+            <!-- Aquí se mostrará el contenido del carrito -->
+        </ul>
+        <p id="total">Total: $0</p>
+        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+    </div>
+    
+    <script src="app.js"></script>
 </body>
 </html>

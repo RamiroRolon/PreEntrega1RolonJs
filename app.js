@@ -1,29 +1,57 @@
-function calcularPrestamo() {
-    var monto = parseFloat(prompt("Ingrese el monto del préstamo:"));
-    var tasa = parseFloat(prompt("Ingrese la tasa de interés (%):"));
-    var plazo = parseInt(prompt("Ingrese el plazo en meses:"));
+var productos = [
+    { id: 1, nombre: "Proteína en Polvo", precio: 30 },
+    { id: 2, nombre: "Creatina", precio: 20 },
+    { id: 3, nombre: "BCAA", precio: 25 }
+];
 
-    if (isNaN(monto) || isNaN(tasa) || isNaN(plazo) || monto <= 0 || tasa <= 0 || plazo <= 0) {
-        alert("Por favor, ingrese valores válidos.");
-        return;
-    }
+var carrito = [];
 
-    var tasaInteresMensual = tasa / 100 / 12;
-    var cuotaMensual = (monto * tasaInteresMensual) / (1 - Math.pow(1 + tasaInteresMensual, -plazo));
+// Funciones
+function mostrarProductos() {
+    var productosList = document.getElementById("productos-list");
+    productosList.innerHTML = "<h2>Productos Disponibles:</h2>";
 
-    var resultado = "Cuota mensual: $" + cuotaMensual.toFixed(2);
-    console.log(resultado);
-    
-    var desglose = "Desglose de Pagos Mensuales:\n";
-    var saldoRestante = monto;
-
-    for (var mes = 1; mes <= plazo; mes++) {
-        var interesMensual = saldoRestante * tasaInteresMensual;
-        var principalMensual = cuotaMensual - interesMensual;
-        saldoRestante -= principalMensual;
-
-        desglose += "Mes " + mes + " - Cuota: $" + cuotaMensual.toFixed(2) + " - Interés: $" + interesMensual.toFixed(2) + " - Principal: $" + principalMensual.toFixed(2) + " - Saldo Restante: $" + saldoRestante.toFixed(2) + "\n";
-    }
-
-    console.log(desglose);
+    productos.forEach(function(producto) {
+        var productoItem = document.createElement("div");
+        productoItem.classList.add("producto");
+        productoItem.innerHTML = `${producto.id}. ${producto.nombre} - $${producto.precio} <button onclick="agregarProducto(${producto.id})">Agregar</button>`;
+        productosList.appendChild(productoItem);
+    });
 }
+
+function actualizarCarrito() {
+    var carritoList = document.getElementById("carrito-list");
+    var total = 0;
+
+    carritoList.innerHTML = "";
+    carrito.forEach(function(producto) {
+        var carritoItem = document.createElement("li");
+        carritoItem.textContent = `${producto.nombre} - $${producto.precio}`;
+        carritoList.appendChild(carritoItem);
+        total += producto.precio;
+    });
+
+    var totalElement = document.getElementById("total");
+    totalElement.textContent = `Total: $${total}`;
+}
+
+
+
+function agregarProducto(id) {
+    var productoSeleccionado = productos.find(function(producto) {
+        return producto.id === id;
+    });
+
+    if (productoSeleccionado) {
+        carrito.push(productoSeleccionado);
+        actualizarCarrito();
+    }
+}
+
+function vaciarCarrito() {
+    carrito = [];
+    actualizarCarrito();
+}
+
+// Ejecución de las funciones
+mostrarProductos();

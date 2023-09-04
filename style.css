@@ -1,28 +1,15 @@
+/* Estilos CSS */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    background-color: #f0f0f0;
 }
 
 h1 {
     text-align: center;
-}
-
-#productos-list {
-    margin-top: 20px;
-}
-
-#carrito {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-}
-
-#total {
-    text-align: right;
-    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 button {
@@ -36,4 +23,37 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+#productos-list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#carrito {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#carrito h2 {
+    margin-bottom: 10px;
+}
+
+#carrito-list {
+    list-style: none;
+    padding: 0;
+}
+
+#carrito-list li {
+    margin-bottom: 5px;
+}
+
+#total {
+    text-align: right;
+    font-weight: bold;
 }

@@ -1,3 +1,4 @@
+// Variables
 var productos = [
     { id: 1, nombre: "Proteína en Polvo", precio: 30 },
     { id: 2, nombre: "Creatina", precio: 20 },
@@ -35,8 +36,6 @@ function actualizarCarrito() {
     totalElement.textContent = `Total: $${total}`;
 }
 
-
-
 function agregarProducto(id) {
     var productoSeleccionado = productos.find(function(producto) {
         return producto.id === id;
@@ -48,9 +47,30 @@ function agregarProducto(id) {
     }
 }
 
+function agregarProductoPrompt() {
+    var idProducto = parseInt(prompt("Ingrese el ID del producto que desea agregar al carrito:"));
+    if (isNaN(idProducto)) {
+        alert("ID de producto inválido. Intente nuevamente.");
+        return;
+    }
+
+    var productoSeleccionado = productos.find(function(producto) {
+        return producto.id === idProducto;
+    });
+
+    if (productoSeleccionado) {
+        carrito.push(productoSeleccionado);
+        actualizarCarrito();
+        alert(`"${productoSeleccionado.nombre}" se ha agregado al carrito.`);
+    } else {
+        alert("Producto no encontrado.");
+    }
+}
+
 function vaciarCarrito() {
     carrito = [];
     actualizarCarrito();
+    alert("El carrito se ha vaciado.");
 }
 
 // Ejecución de las funciones

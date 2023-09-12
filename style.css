@@ -32,6 +32,13 @@ button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.producto {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 #carrito {
     background-color: white;
     padding: 20px;
@@ -42,6 +49,7 @@ button:hover {
 
 #carrito h2 {
     margin-bottom: 10px;
+    color: #333;
 }
 
 #carrito-list {
@@ -51,9 +59,25 @@ button:hover {
 
 #carrito-list li {
     margin-bottom: 5px;
+    color: #555;
 }
 
 #total {
     text-align: right;
     font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+#vaciar-carrito {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#vaciar-carrito:hover {
+    background-color: #c82333;
 }

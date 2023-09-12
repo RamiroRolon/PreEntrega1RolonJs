@@ -10,12 +10,11 @@ var carrito = [];
 // Funciones
 function mostrarProductos() {
     var productosList = document.getElementById("productos-list");
-    productosList.innerHTML = "<h2>Productos Disponibles:</h2>";
 
     productos.forEach(function(producto) {
         var productoItem = document.createElement("div");
         productoItem.classList.add("producto");
-        productoItem.innerHTML = `${producto.id}. ${producto.nombre} - $${producto.precio} <button onclick="agregarProducto(${producto.id})">Agregar</button>`;
+        productoItem.innerHTML = `${producto.nombre} - $${producto.precio} <button onclick="agregarProducto(${producto.id})">Agregar</button>`;
         productosList.appendChild(productoItem);
     });
 }
@@ -44,34 +43,33 @@ function agregarProducto(id) {
     if (productoSeleccionado) {
         carrito.push(productoSeleccionado);
         actualizarCarrito();
-    }
-}
-
-function agregarProductoPrompt() {
-    var idProducto = parseInt(prompt("Ingrese el ID del producto que desea agregar al carrito:"));
-    if (isNaN(idProducto)) {
-        alert("ID de producto inválido. Intente nuevamente.");
-        return;
-    }
-
-    var productoSeleccionado = productos.find(function(producto) {
-        return producto.id === idProducto;
-    });
-
-    if (productoSeleccionado) {
-        carrito.push(productoSeleccionado);
-        actualizarCarrito();
-        alert(`"${productoSeleccionado.nombre}" se ha agregado al carrito.`);
-    } else {
-        alert("Producto no encontrado.");
+        guardarCarritoEnStorage(); // Almacenar carrito en localStorage
     }
 }
 
 function vaciarCarrito() {
     carrito = [];
     actualizarCarrito();
-    alert("El carrito se ha vaciado.");
+    guardarCarritoEnStorage(); // Almacenar carrito vacío en localStorage
 }
+
+function cargarCarritoDesdeStorage() {
+    var carritoGuardado = JSON.parse(localStorage.getItem("carrito"));
+    if (carritoGuardado) {
+        carrito = carritoGuardado;
+        actualizarCarrito();
+    }
+}
+
+function guardarCarritoEnStorage() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+// Manejo del evento "Vaciar Carrito"
+document.getElementById("vaciar-carrito").addEventListener("click", function() {
+    vaciarCarrito();
+});
 
 // Ejecución de las funciones
 mostrarProductos();
+cargarCarritoDesdeStorage(); // Cargar carrito desde localStorage al cargar la página
